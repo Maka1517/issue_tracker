@@ -1,0 +1,117 @@
+[
+{
+  "model": "webapp.status",
+  "pk": 1,
+  "fields": {
+    "status_name": "new"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 2,
+  "fields": {
+    "status_name": "in progress"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 3,
+  "fields": {
+    "status_name": "done"
+  }
+},
+{
+  "model": "webapp.issuetype",
+  "pk": 1,
+  "fields": {
+    "issue_type": "task"
+  }
+},
+{
+  "model": "webapp.issuetype",
+  "pk": 2,
+  "fields": {
+    "issue_type": "bug"
+  }
+},
+{
+  "model": "webapp.issuetype",
+  "pk": 3,
+  "fields": {
+    "issue_type": "enhabcement"
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 1,
+  "fields": {
+    "summary": "\u041f\u0440\u043e\u0435\u043a\u0442_1",
+    "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043c\u0435\u0434\u0438\u0446\u0438\u043d\u0441\u043a\u0438\u0439 \u0441\u0430\u0439\u0442",
+    "status": 1,
+    "issue_type": 1,
+    "created_at": "2020-08-06T11:50:10.400Z"
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 2,
+  "fields": {
+    "summary": "\u041f\u0440\u043e\u0435\u043a\u0442_2",
+    "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u0442\u043e\u0440\u0433\u043e\u0432\u044b\u0439 \u0441\u0430\u0439\u0442",
+    "status": 2,
+    "issue_type": 3,
+    "created_at": "2020-08-06T11:51:04.572Z"
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 3,
+  "fields": {
+    "summary": "\u041f\u0440\u043e\u0435\u043a\u0442_3",
+    "description": "\u0414\u043e\u0440\u0430\u0431\u043e\u0442\u0430\u0442\u044c \u043d\u043e\u0432\u043e\u0441\u0442\u043d\u043e\u0439 \u0441\u0430\u0439\u0442",
+    "status": 2,
+    "issue_type": 3,
+    "created_at": "2020-08-06T11:52:01.905Z"
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 4,
+  "fields": {
+    "summary": "\u041f\u0440\u043e\u0435\u043a\u0442_4",
+    "description": "\u0420\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0441 \u043e\u0448\u0438\u0431\u043a\u0430\u043c\u0438 \u0440\u0430\u0437\u0432\u043b\u0435\u043a\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0433\u043e \u0441\u0430\u0439\u0442\u0430",
+    "status": 2,
+    "issue_type": 2,
+    "created_at": "2020-08-06T11:53:23.302Z"
+  }
+},
+{
+  "model": "webapp.issue",
+  "pk": 5,
+  "fields": {
+    "summary": "\u041f\u0440\u043e\u0435\u043a\u0442_5",
+    "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u0441\u0430\u0439\u0442 \u0434\u043b\u044f \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0430 \u0444\u0438\u043b\u044c\u043c\u043e\u0432",
+    "status": 3,
+    "issue_type": 1,
+    "created_at": "2020-08-06T11:54:29.172Z"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$K7N8BSaSYVXW$YvMDEXjXVhATjjQ+XDLXznFO98AGs9MwpsknFPyn7Ik=",
+    "last_login": "2020-08-06T11:33:02.164Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-08-06T11:29:03.140Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
