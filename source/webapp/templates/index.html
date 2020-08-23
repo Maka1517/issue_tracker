@@ -5,8 +5,10 @@
 {% block content %}
     <h1>Issue list</h1>
     {% for issue in issues %}
-        <p>Статус: ({{ issue.status }} | {{ issue.issue_type }})</p>
-        <p>{{ issue.summary }} | {{ issue.created_at|date:"d.m.Y H:i:s" }}</p>
+        <h3><a href="/issue/{{ issue.pk }}">{{ issue.summary }}</a></h3>
+        <p>{{ issue.description }}</p>
+        <p>Status: ({{ issue.status }} | {{ issue.issue_type }})</p>
+        <p>{{ issue.created_at|date:"d.m.Y H:i:s" }}</p>
 
     {% endfor %}
 {% endblock %}

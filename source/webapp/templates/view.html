@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}View{% endblock %}
+
+{% block menu %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <h1>{{ issue.summary }}</h1>
+        <p class="pre">{{ issue.description }}</p>
+        <p>Status: {{ issue.status }} Type: {{ issue.issue_type}}</p>
+        <p>Created at: {{ issue.created_at|date:"d.m.Y H:i:s" }}</p>
+    </div>
+{% endblock %}

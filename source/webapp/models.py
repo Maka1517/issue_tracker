@@ -20,7 +20,7 @@ class Status(models.Model):
 TYPE_CHOICES = [
 ('task', 'Задача'),
 ('bug', 'Ошибка'),
-('enhabcement', 'Улучшение')
+('enhancement', 'Улучшение')
 ]
 
 class IssueType(models.Model):
