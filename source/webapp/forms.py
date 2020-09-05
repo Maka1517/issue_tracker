@@ -2,12 +2,14 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import BaseValidator
 from django.utils.deconstruct import deconstructible
-from .models import STATUS_CHOICES,TYPE_CHOICES
+from .models import STATUS_CHOICES,TYPE_CHOICES, Issue
 
 default_status = STATUS_CHOICES[0][0]
 default_type = TYPE_CHOICES[0][0]
 
 BROWSER_DATETIME_FORMAT = '%Y-%m-%dT%H:%M'
+
+
 
 class IssuesForm(forms.ModelForm):
     summary = forms.CharField(max_length=200, required=True, label='Заголовок')
@@ -31,7 +33,6 @@ class IssuesForm(forms.ModelForm):
         errors = []
         description = cleaned_data.get('description')
         summary = cleaned_data.get('summary')
-        author = cleaned_data.get('author')
         if description and summary and description == summary:
             errors.append(ValidationError("Text of the description should not duplicate it's summary!"))
         if errors:

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
+from django.urls import reverse
 from django.utils.timezone import make_naive
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, CreateView
 
 from webapp.models import Issue
 from webapp.forms import IssuesForm, BROWSER_DATETIME_FORMAT
@@ -30,22 +31,14 @@ class IssueView(TemplateView):
        return context
 
 
-class IssueCreatView(View):
-    def get(self,request):
-        return render(request,'issue_create.html', context={'form':IssuesForm()})
+class IssueCreatView(CreateView):
+    template_name = 'issue_create.html'
+    model = Issue
+    fields = ['summary','description','status','issue_type']
 
-    def post(self,request):
-        form = IssuesForm(data=request.POST)
-        if form.is_valid():
-            issue = Issue.objects.create(
-                summary=form.cleaned_data['summary'],
-                description=form.cleaned_data['description'],
-                status=form.cleaned_data['status'],
-                issue_type=form.cleaned_data['issue_type'],
-                created_at=form.cleaned_data['created_at']
-            )
-            return redirect('issue_view', pk=issue.pk)
-        else:
-            return render(request,'issue_create.html', context={'form': form})
+    def get_success_url(self):
+        return reverse('issue_view', kwargs={'pk': self.object.pk})
+
+
 
 
