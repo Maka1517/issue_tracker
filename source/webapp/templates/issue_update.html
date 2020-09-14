@@ -1,0 +1,14 @@
+<form method="post">
+    {% csrf_token %}
+
+    {% block title %}Update{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'issue_view' issues.pk %}">Отмена</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1>Update Issue</h1>
+
+    {% include 'partial/form.html' with form_method='post' button_text='Update' %}
+{% endblock %}

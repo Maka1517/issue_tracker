@@ -7,12 +7,6 @@ body {
     margin-top: 60px;
 }
 
-.container {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 900px;
-}
-
 .navbar {
     display: block;
     background: #6a7dff;
@@ -24,6 +18,13 @@ body {
     box-sizing: border-box;
     padding: 7px 30px;
 }
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+}
+
 
 .menu {
     font-size: 14px;
