@@ -1,4 +1,4 @@
-<form action="{% url "issue_create" %}" method="post">
+<form action="{% url "webapp:issue_create" %}" method="post">
     {% csrf_token %}
 
     {% include 'partial/form_field.html' with field=form.summary %}
