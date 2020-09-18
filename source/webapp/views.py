@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseNotAllowed
 from django.urls import reverse, reverse_lazy
 from django.utils.timezone import make_naive
-from django.views.generic import View, TemplateView, CreateView, UpdateView, DeleteView
+from django.views.generic import View, TemplateView, CreateView, UpdateView, DeleteView, DetailView
 
 from webapp.models import Issue
 from webapp.forms import IssuesForm, BROWSER_DATETIME_FORMAT
@@ -26,16 +26,17 @@ def my_view(request):
     return HttpResponse('Hello!')
 
 
-class IssueView(TemplateView):
+class IssueView(DetailView):
    template_name = 'view.html'
-   def get_context_data(self, **kwargs):
-       context = super().get_context_data(**kwargs)
-
-       pk = self.kwargs.get('pk')
-       issue = get_object_or_404(Issue, pk=pk)
-
-       context['issue'] = issue
-       return context
+   model = Issue
+   # def get_context_data(self, **kwargs):
+   #     context = super().get_context_data(**kwargs)
+   #
+   #     pk = self.kwargs.get('pk')
+   #     issue = get_object_or_404(Issue, pk=pk)
+   #
+   #     context['issue'] = issue
+   #     return context
 
 
 class IssueCreatView(LoginRequiredMixin, CreateView):
