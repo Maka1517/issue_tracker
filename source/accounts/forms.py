@@ -12,4 +12,9 @@ class MyUserCreationForm(UserCreationForm):
         field_classes = {'username': UsernameField}
 
     def clean(self):
-        pass
+        cleaned_data = super(MyUserCreationForm, self).clean()
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
+        if not first_name or last_name:
+            raise forms.ValidationError('Вы не заполнили поле first_name или last_name')
+
