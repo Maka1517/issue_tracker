@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseNotAllowed
 from django.urls import reverse, reverse_lazy
 from django.utils.timezone import make_naive
@@ -39,30 +39,44 @@ class IssueView(DetailView):
    #     return context
 
 
-class IssueCreatView(LoginRequiredMixin, CreateView):
+class IssueCreatView(PermissionRequiredMixin, CreateView):
     template_name = 'issue_create.html'
     model = Issue
     fields = ['summary', 'description', 'status', 'issue_type']
+    permission_required = 'webapp.change_issue'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('issue_view', kwargs={'pk': self.object.pk})
 
 
-class IssueUpdateView(LoginRequiredMixin, UpdateView):
+class IssueUpdateView(PermissionRequiredMixin, UpdateView):
     model = Issue
     template_name = 'issue_update.html'
     form_class = IssuesForm
     context_object_name = 'issues'
+    permission_required = 'webapp.change_issue'
+
+    def has_permission(self):
+        return super().has_permission() or self.get_object().author == self.request.user
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('issue_view', kwargs={'pk': self.object.pk})
 
 
-class IssueDeleteView(LoginRequiredMixin, DeleteView):
+class IssueDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'issue_delete.html'
     model = Issue
     context_object_name = 'issues'
     success_url = reverse_lazy('index')
+    permission_required = 'webapp.delete_issue'
 
 
 

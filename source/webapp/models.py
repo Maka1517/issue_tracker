@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 
@@ -6,6 +7,7 @@ STATUS_CHOICES = [
     ('in progress', 'В процессе'),
     ('done', 'Выполнено')
 ]
+
 
 class Status(models.Model):
     status_name = models.CharField(max_length=50, choices=STATUS_CHOICES, verbose_name='Статус')
@@ -17,11 +19,13 @@ class Status(models.Model):
         verbose_name = 'Статус'
         verbose_name_plural = 'Статусы'
 
+
 TYPE_CHOICES = [
 ('task', 'Задача'),
 ('bug', 'Ошибка'),
 ('enhancement', 'Улучшение')
 ]
+
 
 class IssueType(models.Model):
     issue_type = models.CharField(max_length=15, choices=TYPE_CHOICES, verbose_name='Статус')
@@ -33,16 +37,16 @@ class IssueType(models.Model):
         verbose_name = 'Тип'
         verbose_name_plural = 'Типы'
 
+
 class Issue(models.Model):
     summary = models.CharField(max_length=200, null=False, blank=False, verbose_name='Заголовок')
     description = models.TextField(max_length=3000,  verbose_name='Описание')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_DEFAULT, default=1, related_name='issues', verbose_name='Автор')
     status = models.ForeignKey('webapp.Status', related_name='status',
                                 on_delete=models.PROTECT, verbose_name='Статус')
     issue_type =models.ForeignKey('webapp.IssueType', related_name='type',
                                 on_delete=models.PROTECT, verbose_name='Тип')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-
-
 
     def __str__(self):
         return "{}. {}. {}".format(self.summary, self.status,self.issue_type)

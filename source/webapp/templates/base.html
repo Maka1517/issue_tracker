@@ -16,7 +16,9 @@
        <div class="container">
            <ul class="menu">
                <li><a href="{% url 'webapp:index' %}">Index</a></li>
+               {% if perms.webapp.change_issue or issue.author == request.user %}
                <li><a href="{% url 'webapp:issue_create' %}">Add Issue</a></li>
+               {% endif %}
                {% if user.is_authenticated %}
                     {% block menu_links %}{% endblock %}
                     <li class="menu-right"><a href="{% url 'accounts:logout' %}" class="nav-link">Выход</a></li>
