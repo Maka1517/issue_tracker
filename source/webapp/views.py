@@ -45,12 +45,15 @@ class IssueCreatView(PermissionRequiredMixin, CreateView):
     fields = ['summary', 'description', 'status', 'issue_type']
     permission_required = 'webapp.change_issue'
 
+    def has_permission(self):
+        return super().has_permission() or self.get_object().author == self.request.user
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('issue_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:issue_view', kwargs={'pk': self.object.pk})
 
 
 class IssueUpdateView(PermissionRequiredMixin, UpdateView):

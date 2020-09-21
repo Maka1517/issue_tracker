@@ -2,9 +2,7 @@
 
 {% block title %}View{% endblock %}
 
-{% block menu %}
 
-{% endblock %}
 
 {% block content %}
     <div class="box">
@@ -12,5 +10,10 @@
         <p class="pre">{{ issue.description }}</p>
         <p>Status: {{ issue.status }} Type: {{ issue.issue_type}}</p>
         <p>Created at: {{ issue.created_at|date:"d.m.Y H:i:s" }}</p>
+        {% if perms.webapp.change_issue or issue.author == request.user %}
+        <p>By: {{ issue.author }}</p>
+        <p><a href="{% url 'webapp:issue_delete' issue.pk %}">Delete</a></p>
+        <p><a href="{% url 'webapp:issue_update' issue.pk %}">Update</a></p>
+        {% endif %}
     </div>
 {% endblock %}
