@@ -4,22 +4,27 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.http import HttpResponseNotAllowed
 from django.urls import reverse, reverse_lazy
 from django.utils.timezone import make_naive
-from django.views.generic import View, TemplateView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import View, TemplateView, CreateView, UpdateView, DeleteView, DetailView, ListView
 
 from webapp.models import Issue
 from webapp.forms import IssuesForm, BROWSER_DATETIME_FORMAT
 
 
-class IndexView(View):
-    def get(self, request):
-        is_admin = request.GET.get('is_admin', None)
-        if is_admin:
-            data = Issue.objects.all()
-        else:
-            data = Issue.objects.all()
-        return render(request, 'index.html', context={
-            'issues': data
-        })
+class IndexView(ListView):
+    template_name = 'index.html'
+    context_object_name = 'issues'
+    paginate_by = 4
+    paginate_orphans = 2
+    model = Issue
+    ordering = ['created_at']
+
+    # def get_queryset(self):
+    #     data = super().get_queryset()
+    #     if not self.request.GET.get('is_admin', None):
+    #         data = data.filter(status='moderated')
+    #     return data
+
+
 
 @login_required
 def my_view(request):

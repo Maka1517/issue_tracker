@@ -4,6 +4,9 @@
 
 {% block content %}
     <h1>Issue list</h1>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
     {% for issue in issues %}
         <h3><a href="{% url 'webapp:issue_view' issue.pk %}">{{ issue.summary }}</a></h3>
         <p>{{ issue.description }}</p>
