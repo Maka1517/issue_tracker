@@ -1,0 +1,33 @@
+{% if is_paginated %}
+    {% include 'partial/pagination.html' %}
+{% endif %}
+
+{% for article in articles %}
+    <div class="box">
+        <h3><a href="{% url "issue_view" issue.pk %}">{{ issue.summary }}</a></h3>
+        <p>
+            <label for="selected_issues-{{ issue.pk }}">Select:</label>
+            <input type="checkbox" name="selected_issues"
+                   id="selected_issues-{{ issue.pk }}" value="{{ issue.pk }}">
+        </p>
+        <p>Статус: ({{ issue.status }} | {{ issue.get_status_display }})</p>
+        <p>
+            <a href="{% url 'accounts:detail' issue.author_id %}">{{ issue.author }}</a>
+            | {{ issue.created_at|date:"d.m.Y H:i:s" }}
+        </p>
+        <p>Created at: {{ issue.created_at|date:"d.m.Y H:i:s" }}</p>
+        {% if perms.webapp.change_issue or issue.author == request.user %}
+            <p><a href="{% url 'issue_update' issue.pk %}">Update</a></p>
+        {% endif %}
+        {% if perms.webapp.delete_issue or issue.author == request.user %}
+            <p><a href="{% url 'issue_delete' issue.pk %}">Delete</a></p>
+        {% endif %}
+    </div>
+{% empty %}
+    <h2 class="text-center">Нет статей</h2>
+{% endfor %}
+
+{% if is_paginated %}
+     {% include 'partial/pagination.html' %}
+{% endif %}
+
