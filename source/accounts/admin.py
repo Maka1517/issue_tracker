@@ -10,7 +10,7 @@ class ProfileInline(admin.StackedInline):
 
 
 class ProfileAdmin(UserAdmin):
-    model = [ProfileInline]
+    inlines = [ProfileInline]
 
 
 User = get_user_model()
