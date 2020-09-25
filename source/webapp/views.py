@@ -26,9 +26,9 @@ class IndexView(ListView):
 
 
 
-@login_required
-def my_view(request):
-    return HttpResponse('Hello!')
+# @login_required
+# def my_view(request):
+#     return HttpResponse('Hello!')
 
 
 class IssueView(DetailView):

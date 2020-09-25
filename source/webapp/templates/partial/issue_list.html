@@ -2,9 +2,9 @@
     {% include 'partial/pagination.html' %}
 {% endif %}
 
-{% for article in articles %}
+{% for issue in issues %}
     <div class="box">
-        <h3><a href="{% url "issue_view" issue.pk %}">{{ issue.summary }}</a></h3>
+        <h3><a href="{% url "webapp:issue_view" issue.pk %}">{{ issue.summary }}</a></h3>
         <p>
             <label for="selected_issues-{{ issue.pk }}">Select:</label>
             <input type="checkbox" name="selected_issues"
@@ -17,10 +17,10 @@
         </p>
         <p>Created at: {{ issue.created_at|date:"d.m.Y H:i:s" }}</p>
         {% if perms.webapp.change_issue or issue.author == request.user %}
-            <p><a href="{% url 'issue_update' issue.pk %}">Update</a></p>
+            <p><a href="{% url 'webapp:issue_update' issue.pk %}">Update</a></p>
         {% endif %}
         {% if perms.webapp.delete_issue or issue.author == request.user %}
-            <p><a href="{% url 'issue_delete' issue.pk %}">Delete</a></p>
+            <p><a href="{% url 'webapp:issue_delete' issue.pk %}">Delete</a></p>
         {% endif %}
     </div>
 {% empty %}

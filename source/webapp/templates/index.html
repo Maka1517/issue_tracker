@@ -4,18 +4,5 @@
 
 {% block content %}
     <h1>Issue list</h1>
-    {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
-    {% endif %}
     {% include 'partial/issue_list.html' %}
-    {% for issue in issues %}
-        <h3><a href="{% url 'webapp:issue_view' issue.pk %}">{{ issue.summary }}</a></h3>
-        <p>{{ issue.description }}</p>
-        <p>Status: ({{ issue.status }} | {{ issue.issue_type }})</p>
-        <p>{{ issue.created_at|date:"d.m.Y H:i:s" }}</p>
-        {% if perms.webapp.change_issue or issue.author == request.user %}
-        <p><a href="{% url 'webapp:issue_delete' issue.pk %}">Delete</a></p>
-        <p><a href="{% url 'webapp:issue_update' issue.pk %}">Update</a></p>
-        {% endif %}
-    {% endfor %}
 {% endblock %}
